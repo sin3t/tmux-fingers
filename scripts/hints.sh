@@ -37,6 +37,13 @@ function show_hints_and_swap() {
   current_pane_id=$1
   fingers_pane_id=$2
   compact_state=$3
-  tmux swap-pane -s "$current_pane_id" -t "$fingers_pane_id"
+
+  pane_was_zoomed=$(is_pane_zoomed "$current_pane_id")
+
+  if [[ $pane_was_zoomed == "1" ]]; then
+      tmux swap-pane -s "$current_pane_id" -t "$fingers_pane_id" \; resize-pane -Z
+  else
+      tmux swap-pane -s "$current_pane_id" -t "$fingers_pane_id"
+  fi
   show_hints "$fingers_pane_id" $compact_state
 }

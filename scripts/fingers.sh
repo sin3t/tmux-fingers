@@ -88,9 +88,7 @@ trap "handle_exit" EXIT
 compact_state=$FINGERS_COMPACT_HINTS
 help_state=0
 
-pane_was_zoomed=$(is_pane_zoomed "$current_pane_id")
 show_hints_and_swap $current_pane_id $fingers_pane_id $compact_state
-[[ $pane_was_zoomed == "1" ]] && zoom_pane "$fingers_pane_id"
 
 hide_cursor
 input=''
