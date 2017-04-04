@@ -14,6 +14,7 @@ current_pane_id=$1
 fingers_pane_id=$2
 pane_input_temp=$3
 original_rename_setting=$4
+origin_window_name=$5
 
 BACKSPACE=$'\177'
 
@@ -36,6 +37,7 @@ function handle_exit() {
   [[ $pane_was_zoomed == "1" ]] && zoom_pane "$current_pane_id"
   tmux kill-pane -t "$fingers_pane_id"
   tmux set-window-option automatic-rename "$original_rename_setting"
+  tmux rename-window "$origin_window_name"
   rm -rf "$pane_input_temp" "$pane_output_temp" "$match_lookup_table"
 }
 
